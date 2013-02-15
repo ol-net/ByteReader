@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="HomeView" creationComplete="init()">
+	<fx:Declarations>
+		<!-- Platzieren Sie nichtvisuelle Elemente (z. B. Dienste, Wertobjekte) hier -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			
+			import views.Download;
+			import events.DownloadEvent;
+			import events.OnProgressEvent;
+			
+			public function init():void
+			{
+				var downLoader:Download = new Download();
+				
+				downLoader.addEventListener(DownloadEvent.DOWNLOAD_COMPLETE, downloadComplete);
+				downLoader.addEventListener(OnProgressEvent.PROGRESS, onProgressEvent); 
+				
+				var file:File = File.documentsDirectory.resolvePath("hallo7.mp4"); 
+				
+				downLoader.download("http://ol-web.de/STIRBLANGSAM-EinguterTagzumSterben-Trailer-(Full-HD)-Deutsch_German.mp4", file, "", "");
+			}
+			
+			public function downloadComplete(e:DownloadEvent):void
+			{
+				trace("fertig")
+			}
+			
+			public function onProgressEvent(e:OnProgressEvent):void
+			{
+				//trace(e.percent+" %")
+			}
+		]]>
+	</fx:Script>
+	
+</s:View>
